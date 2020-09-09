@@ -5,6 +5,7 @@ import Zoom from "react-reveal/Zoom";
 import Modal from "react-modal";
 import { connect } from "react-redux";
 import { fetchProducts } from "../utils/redux/productActions";
+import { addToCart } from "../utils/redux/cartActions";
 // import { Zoom } from "react-toastify";
 class Products extends Component {
   constructor(props) {
@@ -13,8 +14,8 @@ class Products extends Component {
       product: null,
     };
   }
-  componentDidMount(){
-    this.props.fetchProducts()
+  componentDidMount() {
+    this.props.fetchProducts();
   }
   openModal = (product) => {
     console.log(product);
@@ -99,9 +100,10 @@ class Products extends Component {
   }
 }
 const mapStateToProps = (state) => ({
-  products: state.products.items,
+  products: state.products.filteredItems,
 });
 const mapDispatchToProps = {
   fetchProducts,
+  addToCart,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Products);

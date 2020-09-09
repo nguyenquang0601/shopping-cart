@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import formatCurrency from "../utils/format";
 import Fade from "react-reveal/Fade";
-export default class Cart extends Component {
+import { connect } from "react-redux";
+import { addToCart, removeFromCart } from "../utils/redux/cartActions";
+class Cart extends Component {
   constructor(props) {
     super(props);
     this.emailRef = React.createRef();
@@ -125,3 +127,11 @@ export default class Cart extends Component {
     );
   }
 }
+const mapStateToProps = (state) => ({
+  cartItems: state.cart.cartItems,
+});
+const mapDispatchtoProps = {
+  addToCart,
+  removeFromCart,
+};
+export default connect(mapStateToProps, mapDispatchtoProps)(Cart);
